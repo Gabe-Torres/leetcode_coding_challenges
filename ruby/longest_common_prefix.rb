@@ -1,24 +1,10 @@
 def longest_common_prefix(strs)
-  shortest_word = strs.sort_by!{|str| str.length}.first
-
-  prefix = ""
-  common = []
-
-  shortest_word.length.times do
-    strs.each do |str|
-      if str.start_with?(shortest_word)
-      common.push(true)
-
-      if common.length == strs.length
-        return prefix = shortest_word
-      end
-      else
-      shortest_word.chop!
-      common = []
-      end
+  strs.reduce do |prefix, str|
+    while !str.start_with?(prefix)
+      prefix = prefix[0...-1]
     end
+    prefix
   end
-  prefix
 end
 # Write a function to find the longest common prefix string amongst an array of strings.
 
